@@ -1,0 +1,35 @@
+query Components {
+  participatoryProcess(id: "1") {
+    title {
+      translation(locale: "fr")
+    }
+    components {
+      id
+      name {
+        translation(locale: "fr")
+      }
+    }
+  }
+}
+
+query Proposals($id: ID!, $after: String) {
+  component(id: $id) {
+    ... on Proposals {
+      proposals(after: $after) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        edges {
+          node {
+            id
+            acceptsNewComments
+            title
+            endorsementsCount
+            reference
+          }
+        }
+      }
+    }
+  }
+}
